@@ -8,9 +8,9 @@ rpc.on('ready', async() => {
     rpc.setActivity({
         details: 'This is details',
         state: 'this is state',
-        largeImageKey: 'large',
+        largeImageKey: 'unreal',
         largeImageText: 'This is a large image',
-        smallImageKey: 'small',
+        smallImageKey: 'unity',
         smallImageText: 'this is small image',
         startTimestamp: new Date(),
         buttons: [{
@@ -25,5 +25,5 @@ rpc.on('ready', async() => {
 })
 
 rpc.login({
-    clientId: '886948968053997598'
+    clientId: 'YOur client ID Goes here'
 })
