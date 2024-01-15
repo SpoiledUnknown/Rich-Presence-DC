@@ -1,29 +1,29 @@
-const RPC = require('discord-rpc')
-const rpc = new RPC.Client({
-    transport: 'ipc'
+import RPC from 'discord-rpc'
+const richPresence = new RPC.Client({
+    transport:'ipc'
 })
 
-rpc.on('ready', async() => {
-    
-    rpc.setActivity({
+richPresence.on('ready', () => {
+    richPresence.setActivity({
         details: 'This is details',
         state: 'this is state',
+        startTimestamp: new Date(),
         largeImageKey: 'unreal',
         largeImageText: 'This is a large image',
-        smallImageKey: 'unity',
+        smallImageKey: 'visualstudios',
         smallImageText: 'this is small image',
-        startTimestamp: new Date(),
         buttons: [{
-            label: 'This is b1',
+            label: 'This is button 1',
             url: 'https://discord.com/developers/applications/886948968053997598/information'
         },{
-           label : 'This is b2',
+           label : 'This is button 2',
            url : 'https://discord.com/developers/applications/886948968053997598/information' 
         }]
     })
-    console.log('Client is ready')
+
+    console.log("Client is ready!")
 })
 
-rpc.login({
-    clientId: 'YOur client ID Goes here'
+richPresence.login({
+    clientId: '886576833838088243'
 })
