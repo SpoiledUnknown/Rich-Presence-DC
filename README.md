@@ -26,7 +26,7 @@
 
 ### Method 1:
 
-- Download the executable from [here]().
+- Download the executable from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.0.2).
    - Double click the exe file.
    - Go through the simple prompts.
  - Note: in some cases the exe file might not work in that case use bellow provided steps -
@@ -34,7 +34,7 @@
     - drag and drop the exe file to the ternimal window
     - press enter.
 ### Method 2:
-- Clone the repo, or download the source code from [here]().
+- Clone the repo, or download the source code from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.0.2).
 - Open the ternimal at the location of the source code
 - Use `cd "path/to/inside/of/source-code/"`, to access the source code.
 - Run `npm install`.
@@ -42,7 +42,7 @@
 
 ## How To Setup Dev Environment:
 - Install NodeJs from [here](https://nodejs.org/en/download/).
- - Clone the repo, or download the source code from [here]().
+ - Clone the repo, or download the source code from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.0.2).
  - Open it using [VS Code](https://code.visualstudio.com/download) or any other Code Editor/IDE.
 - Press `ctrl` + `
 - Run `npm install`
