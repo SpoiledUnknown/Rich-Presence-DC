@@ -1,16 +1,26 @@
 {
   "name": "richcord-presence",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "a simple discord rich presence app",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "start": "index.js"
+  },
   "scripts": {
-    "dev": "node index.js"
+    "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Spoiled Unknown",
+  "license": "MIT",
   "dependencies": {
-    "discord-rpc": "^4.0.1"
+    "chalk-animation": "^2.0.3",
+    "discord-rpc": "^4.0.1",
+    "inquirer": "^9.2.12",
+    "nanospinner": "^1.1.0"
+  },
+  "pkg": {
+    "scripts": "index.js",
+    "targets": ["node18-win-x64"]
   }
 }
