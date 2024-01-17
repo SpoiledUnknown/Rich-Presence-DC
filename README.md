@@ -3,9 +3,10 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 [![Docs Passing](https://img.shields.io/badge/Docs-Passing-brightgreen.svg)](https://github.com/SpoiledUnknown/Richcord-Presence)
 
-<div style="text-align:center;">
-   <img src="./assets/Richcord.png" alt="Richord Presence" width="100px">
-</div>
+<p align="center">
+    <img src="./assets/Richcord.png" alt="Richord Presence" width="100px">
+</p>
+
 
 
 
