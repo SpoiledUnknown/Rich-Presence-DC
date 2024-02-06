@@ -1,7 +1,7 @@
 # Richcord Presence - Discord RPC
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-[![Docs Passing](https://img.shields.io/badge/Docs-Passing-brightgreen.svg)](https://github.com/SpoiledUnknown/Richcord-Presence)
+[![Docs Passing](https://img.shields.io/badge/Docs-Passing-brightgreen.svg)](https://github.com/SpoiledUnknown/Richcord-Presence/blob/main/README.md)
 
 <p align="center">
     <img src="./assets/Richcord.png" alt="Richord Presence" width="100px">
@@ -29,7 +29,7 @@
 
 ### Method 1:
 
-- Download the executable from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.0.2).
+- Download the executable from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.5.1).
    - Double click the exe file.
    - Go through the simple prompts.
  - Note: in some cases the exe file might not work in that case use bellow provided steps -
@@ -45,7 +45,7 @@
 
 ## How To Setup Dev Environment:
 - Install NodeJs from [here](https://nodejs.org/en/download/).
- - Clone the repo, or download the source code from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.0.2).
+ - Clone the repo, or download the source code from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.5.1).
  - Open it using [VS Code](https://code.visualstudio.com/download) or any other Code Editor/IDE.
 - Open console (in vs code press ctrl + `).
 - Run `npm install`
