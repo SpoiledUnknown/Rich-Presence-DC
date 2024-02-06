@@ -25,8 +25,6 @@
 
  ## Installation:
 
-***Currently we only support windows 11, more OS supported will be added.***
-
 **Note:** *Method 2 requires the NodeJS installed in pc if not avaibale install from [here](https://nodejs.org/en/download/).*
 
 ### Method 1:
@@ -49,7 +47,7 @@
 - Install NodeJs from [here](https://nodejs.org/en/download/).
  - Clone the repo, or download the source code from [here](https://github.com/SpoiledUnknown/Richcord-Presence/releases/tag/v1.0.2).
  - Open it using [VS Code](https://code.visualstudio.com/download) or any other Code Editor/IDE.
-- Press `ctrl` + `
+- Open console (in vs code press ctrl + `).
 - Run `npm install`
   
 ## Custom Client Setup:

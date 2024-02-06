@@ -1,6 +1,6 @@
 {
   "name": "richcord-presence",
-  "version": "1.0.2",
+  "version": "1.5.1",
   "description": "a simple discord rich presence app",
   "main": "index.js",
   "type": "module",
