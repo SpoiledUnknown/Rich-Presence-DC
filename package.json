@@ -17,6 +17,7 @@
     "chalk-animation": "^2.0.3",
     "discord-rpc": "^4.0.1",
     "inquirer": "^9.2.12",
-    "nanospinner": "^1.1.0"
+    "nanospinner": "^1.1.0",
+    "nexe": "^4.0.0-rc.4"
   }
 }
