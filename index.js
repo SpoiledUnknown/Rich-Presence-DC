@@ -1,12 +1,14 @@
 "use strict";
+process.noDeprecation = true; //temporary solution, idk how long this "temporary" period is gonna take
 
 import inquirer from "inquirer";
 import chalkAnimation from "chalk-animation";
 import { createSpinner } from "nanospinner";
 import RPC from "discord-rpc";
-import fs from "fs/promises";
 
-let packageJsonData;
+const author = "Spoiled Unknown";
+const version = "1.1.0";
+
 let clientId,
   state,
   detail,
@@ -14,39 +16,54 @@ let clientId,
   largeImageText,
   smallImageKey,
   smallImageText,
-  buttonKey,
-  buttonURL,
-  secButtonKey,
-  secButtonURL,
+  firstButtonKey,
+  firstButtonURL,
+  secondButtonKey,
+  secondButtonURL,
   timestamps;
 
 const sleep = (ms = 3000) => new Promise((r) => setTimeout(r, ms));
-
-//#region Setup
-const loadJSON = async () => {
-  packageJsonData = JSON.parse(await fs.readFile("./package.json", "utf-8"));
-};
 
 async function Start() {
   const welcomeText = chalkAnimation.karaoke("Welcome to Richcord Presence!");
   await sleep();
   welcomeText.stop();
   const devName = chalkAnimation.pulse(
-    `Made by ${packageJsonData.author} || Version ${packageJsonData.version}`
+    `Made by ${author} || Version ${version}`
   );
   await sleep();
   devName.stop();
 }
 
+//#region Main Logic
 async function ClientId() {
-  const response = await inquirer.prompt({
-    name: "client_id",
-    type: "input",
-    message: "Please enter the client id.",
-    default: "886576833838088243",
-  });
+  const defaultClientId = "886576833838088243";
+  let valid = false;
 
-  clientId = response.client_id;
+  while (!valid) {
+    const response = await inquirer.prompt({
+      name: "client_id",
+      type: "input",
+      message: "Please enter the client id.",
+      default: defaultClientId,
+      validate: (input) => {
+        if (!/^\d+$/.test(input)) {
+          return "Client ID must be a number.";
+        }
+        if (input.length !== defaultClientId.length) {
+          return `Client ID must be exactly ${defaultClientId.length} digits long.`;
+        }
+        return true;
+      },
+    });
+    clientId = response.client_id;
+
+    if (/^\d+$/.test(clientId) && clientId.length === defaultClientId.length) {
+      valid = true;
+    } else {
+      console.log("Invalid client ID. Please try again.");
+    }
+  }
 }
 
 async function State() {
@@ -54,7 +71,7 @@ async function State() {
     name: "state",
     type: "input",
     message: "Please write the state message.",
-    default: `Richord Presence || V${packageJsonData.version}`,
+    default: `Richord Presence || v${version}`,
   });
 
   state = response.state;
@@ -65,7 +82,7 @@ async function Detail() {
     name: "detail",
     type: "input",
     message: "Please write the detail message.",
-    default: `Made By ${packageJsonData.author}`,
+    default: `Made By ${author}`,
   });
 
   detail = response.detail;
@@ -82,12 +99,12 @@ async function LargeImage() {
   largeImageKey = response.large_image;
 }
 
-async function LargeText() {
+async function LargeImageText() {
   const response = await inquirer.prompt({
     name: "large_text",
     type: "input",
     message: "Please write the large image text.",
-    default: `Richcord Presence || Version ${packageJsonData.version}`,
+    default: `Richcord Presence || Version ${version}`,
   });
 
   largeImageText = response.large_text;
@@ -104,7 +121,7 @@ async function SmallImage() {
   smallImageKey = response.small_image;
 }
 
-async function SmallText() {
+async function SmallImageText() {
   const response = await inquirer.prompt({
     name: "small_text",
     type: "input",
@@ -123,7 +140,7 @@ async function FirstButtonText() {
     default: "Repository",
   });
 
-  buttonKey = response.first_text;
+  firstButtonKey = response.first_text;
 }
 
 async function FirstButtonURL() {
@@ -134,10 +151,10 @@ async function FirstButtonURL() {
     default: "https://github.com/SpoiledUnknown/Richcord-Presence",
   });
 
-  buttonURL = response.first_url;
+  firstButtonURL = response.first_url;
 }
 
-async function SecButtonText() {
+async function SecondButtonText() {
   const response = await inquirer.prompt({
     name: "sec_text",
     type: "input",
@@ -145,10 +162,10 @@ async function SecButtonText() {
     default: "Richcord Community",
   });
 
-  secButtonKey = response.sec_text;
+  secondButtonKey = response.sec_text;
 }
 
-async function SecButtonURL() {
+async function SecondButtonURL() {
   const response = await inquirer.prompt({
     name: "sec_url",
     type: "input",
@@ -156,49 +173,63 @@ async function SecButtonURL() {
     default: "https://discord.gg/AUfhhEkhgp",
   });
 
-  secButtonURL = response.sec_url;
+  secondButtonURL = response.sec_url;
 }
 
 async function SetTimestamps() {
-  const response = await inquirer.prompt({
-    name: "timestamps",
-    type: "confirm",
-    message: "Should the time stamps be on or off?",
-  });
+  let valid = false;
 
-  if (response.timestamps) {
-    timestamps = new Date();
-  } else {
-    timestamps = null;
+  while (!valid) {
+    const response = await inquirer.prompt({
+      name: "timestamps",
+      type: "input",
+      message: "Should the time stamps be on or off? (yes/y or no/n)",
+      validate: (input) => {
+        const normalizedInput = input.trim().toLowerCase();
+        if (["yes", "y", "no", "n"].includes(normalizedInput)) {
+          return true;
+        }
+        return 'Please enter "yes/y" or "no/n".';
+      },
+    });
+
+    const normalizedInput = response.timestamps.trim().toLowerCase();
+    if (["yes", "y"].includes(normalizedInput)) {
+      timestamps = new Date();
+      valid = true;
+    } else if (["no", "n"].includes(normalizedInput)) {
+      timestamps = null;
+      valid = true;
+    } else {
+      console.log('Invalid input. Please enter "yes/y" or "no/n".');
+    }
   }
 }
 //#endregion
 
 console.clear();
-loadJSON();
 await Start();
 await ClientId();
-await Detail();
 await State();
+await Detail();
 await LargeImage();
-await LargeText();
+await LargeImageText();
 await SmallImage();
-await SmallText();
+await SmallImageText();
 await FirstButtonText();
 await FirstButtonURL();
-await SecButtonText();
-await SecButtonURL();
+await SecondButtonText();
+await SecondButtonURL();
 await SetTimestamps();
 
 const spinner = createSpinner("Connecting to the client").start();
 
+await sleep();
 const richPresence = new RPC.Client({
   transport: "ipc",
 });
 
 richPresence.on("ready", async () => {
-  await sleep();
-
   richPresence.setActivity({
     details: detail,
     state: state,
@@ -209,12 +240,12 @@ richPresence.on("ready", async () => {
     smallImageText: smallImageText,
     buttons: [
       {
-        label: buttonKey,
-        url: buttonURL,
+        label: firstButtonKey,
+        url: firstButtonURL,
       },
       {
-        label: secButtonKey,
-        url: secButtonURL,
+        label: secondButtonKey,
+        url: secondButtonURL,
       },
     ],
   });
@@ -225,4 +256,16 @@ richPresence.on("ready", async () => {
 
 richPresence.login({
   clientId: clientId,
+});
+
+process.on("uncaughtException", async (err) => {
+  spinner.error({ text: `There was an uncaught error: \n  "${err}"` });
+  const response = await inquirer.prompt({
+    name: "exit",
+    type: "input",
+    message: "Press any key to exit the software.",
+  });
+  if (response.exit) {
+    process.exit(1);
+  }
 });
